@@ -2,26 +2,19 @@ import AlbumGrid from "./AlbumGrid";
 import MainHeader from "./MainHeader";
 import MadeForYouBoxes from "./MadeForYouBoxes";
 import RecentFavorites from "./RecentFavorites";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import Container from "@mui/material/Container";
-import {
-  Grid,
-  Card,
-  Box,
-  CardMedia,
-  CardContent,
-  Typography,
-} from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function MainContent() {
   return (
-    <Container maxWidth="false" sx={{ ml: "2em" }}>
+    <Container maxWidth="false">
       <MainHeader />
       <Typography
         variant="h4"
         sx={{
           color: "#FFFFFF",
-          fontSize: "4em",
+          fontSize: "8.5vh",
           pb: 5,
           fontFamily: "Avenir2, Arial, sans-serif",
         }}
@@ -33,8 +26,9 @@ export default function MainContent() {
         variant="h4"
         sx={{
           color: "#FFFFFF",
-          fontSize: "3em",
+          fontSize: "7vh",
           pt: 10,
+          pb: 5,
           fontFamily: "Avenir2, Arial, sans-serif",
         }}
       >
@@ -47,8 +41,9 @@ export default function MainContent() {
         variant="h4"
         sx={{
           color: "#FFFFFF",
-          fontSize: "3em",
+          fontSize: "6.5vh",
           pt: 10,
+          pb: 5,
           fontFamily: "Avenir2, Arial, sans-serif",
         }}
       >

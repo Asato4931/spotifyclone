@@ -30,20 +30,6 @@ export default function App() {
     },
   });
 
-  // Sample data
-  const playlists1 = [
-    { name: "Vibrations Radio", author: "Spotify", image: dog1 },
-    { name: "XI", author: "asato4931", image: dog2 },
-    // ... add more playlists here
-  ];
-
-  const playlists2 = [
-    { image: dog1, description: "Daily Mix 1" },
-    { image: dog2, description: "Daily Mix 2" },
-
-    // ... add more playlists here
-  ];
-
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
@@ -84,10 +70,12 @@ export default function App() {
               <Box
                 sx={{
                   height: "200vh",
+                  flexShrink: 0,
                   background:
                     "linear-gradient(to bottom, #28004d, #000000 20% )",
                   borderRadius: "30px",
                   marginLeft: "5vw",
+                  overflowY: "auto",
                 }}
               >
                 <Stack direction="column" spacing={3}>

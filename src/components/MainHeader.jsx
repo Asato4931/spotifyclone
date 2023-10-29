@@ -10,29 +10,52 @@ export default function MainHeader() {
     <Box
       sx={{
         display: "flex",
-        alignItems: "center",
+        alignItems: "left",
+
         justifyContent: "space-between",
         marginBottom: "20px",
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "left" }}>
         <IconButton>
-          <ArrowBackIcon sx={{ color: "#FFFFFF" }} />
+          <ArrowBackIcon
+            sx={{
+              color: "#FFFFFF",
+              width: "4.5vw",
+              height: "4.5vh",
+              mt: 2,
+              ml: -5,
+            }}
+          />
         </IconButton>
         <IconButton>
-          <ArrowForwardIcon sx={{ color: "#FFFFFF" }} />
+          <ArrowForwardIcon
+            sx={{
+              color: "#FFFFFF",
+              width: "4.5vw",
+              height: "4.5vh",
+              mt: 2,
+              ml: -8,
+            }}
+          />
         </IconButton>
       </Box>
 
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "right" }}>
         <IconButton>
-          <NotificationsIcon sx={{ color: "#FFFFFF" }} />
+          <NotificationsIcon
+            sx={{ color: "#FFFFFF", width: "4.5vw", height: "4.5vh", mt: 2 }}
+          />
         </IconButton>
         <IconButton>
-          <AccountCircleIcon sx={{ color: "#FFFFFF" }} />
+          <AccountCircleIcon
+            sx={{ color: "#FFFFFF", width: "4.5vw", height: "4.5vh", mt: 2 }}
+          />
         </IconButton>
         <IconButton>
-          <PersonIcon sx={{ color: "#FFFFFF" }} />
+          <PersonIcon
+            sx={{ color: "#FFFFFF", width: "4.5vw", height: "4.5vh", mt: 2 }}
+          />
         </IconButton>
       </Box>
     </Box>

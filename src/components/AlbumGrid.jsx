@@ -1,4 +1,12 @@
-import { Grid, Card, CardContent, Typography, Avatar } from "@mui/material";
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Avatar,
+  Button,
+} from "@mui/material";
+import ButtonBase from "@mui/material/ButtonBase";
 
 import dog2 from "../img/dog2.jpg";
 
@@ -26,42 +34,59 @@ export default function AlbumGrid() {
     <Grid container spacing={2}>
       {albums.map((albums, index) => (
         <Grid item xs={4} key={index}>
-          <Card
+          <ButtonBase
+            onClick={() => console.log(`${albums.name} clicked!`)}
             sx={{
-              display: "flex",
-              flexDirection: "row",
+              width: "100%",
               height: "100%",
-              backgroundColor: "transparent",
+              justifyContent: "left",
               borderRadius: "10px",
+              transition: "background-color 0.3s",
+              "&:hover": {
+                backgroundColor: "#666666",
+              },
             }}
           >
-            <Avatar
-              src={albums.image}
-              variant="square"
-              sx={{ width: 150, height: 150, borderRadius: 0 }}
-            />
-
-            <CardContent
+            <Card
               sx={{
-                flex: "1 0 auto",
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                backgroundColor: "rgba(128, 128, 128,0.2)",
+                flexDirection: "row",
+                height: "100%",
+                width: "100%",
+                flexGrow: 1,
+                backgroundColor: "transparent",
+                borderRadius: "10px",
               }}
             >
-              <Typography
-                variant="subtitle1"
+              <Avatar
+                src={albums.image}
+                variant="square"
+                sx={{ width: 150, height: 150, borderRadius: 0 }}
+              />
+
+              <CardContent
                 sx={{
-                  color: "#FFFFFF",
-                  fontSize: "2em",
-                  fontFamily: "Avenir2, Arial, sans-serif",
+                  flex: "1 0 auto",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  backgroundColor: "rgba(128, 128, 128,0.2)",
                 }}
               >
-                {albums.name}
-              </Typography>
-            </CardContent>
-          </Card>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    color: "#FFFFFF",
+
+                    fontSize: "4.5vh",
+                    fontFamily: "Avenir2, Arial, sans-serif",
+                  }}
+                >
+                  {albums.name}
+                </Typography>
+              </CardContent>
+            </Card>
+          </ButtonBase>
         </Grid>
       ))}
     </Grid>

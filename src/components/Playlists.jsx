@@ -2,21 +2,10 @@ import React, { useState, Fragment, useRef } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Typography from "@mui/material/Typography";
-import Drawer from "@mui/material/Drawer";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import CssBaseline from "@mui/material/CssBaseline";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import IconButton from "@mui/material/IconButton";
-import HomeIcon from "@mui/icons-material/Home";
-import SearchIcon from "@mui/icons-material/Search";
-import CollectionsIcon from "@mui/icons-material/Collections";
 
+import Box from "@mui/material/Box";
+
+import ButtonBase from "@mui/material/ButtonBase";
 import {
   Divider,
   List,
@@ -35,8 +24,6 @@ import senkou from "../img/senkou.jpg";
 import weekly from "../img/discover.jpg";
 import reborn from "../img/reborn.jpg";
 
-import { PlayCircleOutline, Search, AddBox } from "@mui/icons-material";
-
 const playlists1 = [
   { name: "お気に入りの曲", author: "プレイリスト", image: heart },
   { name: "New", author: "プレイリスト・asato4931", image: cherokee },
@@ -48,7 +35,7 @@ const playlists1 = [
   },
   { name: "ハレンチ", author: "アルバム・ちゃんみな", image: harenchi },
   { name: "プレイリスト #2", author: "プレイリスト・asato4931", image: senkou },
-  { name: "XI", author: "asato4931", image: xi },
+  { name: "XI", author: "プレイリスト・asato4931", image: xi },
   { name: "Discover Weekly", author: "プレイリスト・Spotify", image: weekly },
   {
     name: "家庭教師ヒットマンREBORN!",
@@ -65,46 +52,88 @@ export default function Playlists() {
         overflowY: "auto",
         maxHeight: "70vh",
         width: "100%",
+
+        "&::-webkit-scrollbar": {
+          width: "12px",
+          display: "none", // This hides the scrollbar
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "#FFFFFF",
+          borderRadius: "4px",
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: "#121212",
+        },
+
+        // Hover state: scrollbar displayed on hover for Webkit browsers
+        "&:hover": {
+          "&::-webkit-scrollbar": {
+            display: "block", // This displays the scrollbar on hover
+          },
+        },
+
+        scrollbarWidth: "thin",
+        scrollbarColor: "#121212 #000000",
       }}
     >
       <List>
         {playlists1.map((playlists1, index) => (
-          <ListItem key={index} sx={{ py: 2 }}>
-            <ListItemAvatar>
-              <Avatar
-                src={playlists1.image}
-                variant="square"
-                sx={{ width: 100, height: 100, borderRadius: 1 }}
+          <ButtonBase
+            key={index}
+            onClick={() => console.log(`${playlists1.name} clicked!`)}
+            sx={{
+              width: "100%",
+              height: "100%",
+              justifyContent: "left",
+              borderRadius: "10px",
+              transition: "background-color 0.3s",
+              "&:hover": {
+                backgroundColor: "#666666",
+              },
+            }}
+          >
+            <ListItem
+              key={index}
+              sx={{
+                py: 2,
+              }}
+            >
+              <ListItemAvatar>
+                <Avatar
+                  src={playlists1.image}
+                  variant="square"
+                  sx={{ width: 100, height: 100, borderRadius: 1 }}
+                />
+              </ListItemAvatar>
+              <ListItemText
+                primary={
+                  <Typography
+                    variant="body1"
+                    color="#FFFFFF"
+                    sx={{
+                      fontSize: "4.5vh",
+                      fontFamily: "Avenir, Arial, sans-serif",
+                    }}
+                  >
+                    {playlists1.name}
+                  </Typography>
+                }
+                secondary={
+                  <Typography
+                    variant="body2"
+                    color="#808080"
+                    sx={{
+                      fontSize: "4vh",
+                      fontFamily: "Avenir, Arial, sans-serif",
+                    }}
+                  >
+                    {playlists1.author}
+                  </Typography>
+                }
+                sx={{ paddingLeft: "1em" }}
               />
-            </ListItemAvatar>
-            <ListItemText
-              primary={
-                <Typography
-                  variant="body1"
-                  color="#FFFFFF"
-                  sx={{
-                    fontSize: "2em",
-                    fontFamily: "Avenir, Arial, sans-serif",
-                  }}
-                >
-                  {playlists1.name}
-                </Typography>
-              }
-              secondary={
-                <Typography
-                  variant="body2"
-                  color="#808080"
-                  sx={{
-                    fontSize: "1.75em",
-                    fontFamily: "Avenir, Arial, sans-serif",
-                  }}
-                >
-                  {playlists1.author}
-                </Typography>
-              }
-              sx={{ paddingLeft: "1em" }}
-            />
-          </ListItem>
+            </ListItem>
+          </ButtonBase>
         ))}
       </List>
     </Box>

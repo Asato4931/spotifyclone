@@ -7,6 +7,8 @@ import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 
+import ButtonBase from "@mui/material/ButtonBase";
+
 export default function HomeSearch() {
   return (
     <Box
@@ -21,36 +23,54 @@ export default function HomeSearch() {
       }}
     >
       <Stack direction="column">
-        <Stack direction="row" sx={{ mt: -2 }}>
-          <IconButton>
-            <HomeIcon sx={{ color: "#FFFFFF" }} />
-            <Typography
-              sx={{
-                pl: 2,
-                color: "#FFFFFF",
-                fontSize: "1.3em",
-                fontFamily: "Avenir2, Arial, sans-serif",
-              }}
-            >
-              ホーム
-            </Typography>
-          </IconButton>
+        <Stack
+          direction="row"
+          sx={{
+            mt: -1,
+          }}
+        >
+          <ButtonBase onClick={() => console.log("Home clicked!")}>
+            <IconButton>
+              <HomeIcon
+                sx={{
+                  color: "#FFFFFF",
+                  width: "4vw",
+                  height: "4vh",
+                }}
+              />
+              <Typography
+                sx={{
+                  pl: 2,
+                  pt: 1,
+                  color: "#FFFFFF",
+                  fontSize: "4.5vh",
+                  fontFamily: "Avenir2, Arial, sans-serif",
+                }}
+              >
+                ホーム
+              </Typography>
+            </IconButton>
+          </ButtonBase>
         </Stack>
 
-        <Stack direction="row">
-          <IconButton>
-            <SearchIcon sx={{ color: "#FFFFFF" }} />
-            <Typography
-              sx={{
-                pl: 2,
-                color: "#FFFFFF",
-                fontSize: "1.3em",
-                fontFamily: "Avenir2, Arial, sans-serif",
-              }}
-            >
-              検索
-            </Typography>
-          </IconButton>
+        <Stack direction="row" sx={{ pt: 1 }}>
+          <ButtonBase onClick={() => console.log("Home clicked!")}>
+            <IconButton>
+              <SearchIcon
+                sx={{ color: "#FFFFFF", width: "4vw", height: "4vh" }}
+              />
+              <Typography
+                sx={{
+                  pl: 2,
+                  color: "#FFFFFF",
+                  fontSize: "4.5vh",
+                  fontFamily: "Avenir2, Arial, sans-serif",
+                }}
+              >
+                検索
+              </Typography>
+            </IconButton>
+          </ButtonBase>
         </Stack>
       </Stack>
     </Box>

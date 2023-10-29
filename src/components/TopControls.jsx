@@ -1,4 +1,5 @@
 import Typography from "@mui/material/Typography";
+import GridViewIcon from "@mui/icons-material/GridView";
 
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -16,8 +17,10 @@ export default function TopControls() {
         justifyContent: "space-between",
       }}
     >
-      <IconButton color="#FFFFFF">
-        <CollectionsIcon />
+      <IconButton sx={{ ml: -2 }}>
+        <CollectionsIcon
+          sx={{ color: "#FFFFFF", width: "4vw", height: "4vh" }}
+        />
       </IconButton>
       <Typography
         variant="h6"
@@ -25,15 +28,15 @@ export default function TopControls() {
         sx={{
           pl: 2,
           color: "#FFFFFF",
-          fontSize: "2em",
+          fontSize: "4vh",
           fontFamily: "Avenir2, Arial, sans-serif",
         }}
       >
         マイライブラリ
       </Typography>
-      <IconButton color="#FFFFFF">
-        <AddBox />
-      </IconButton>
+      <GridViewIcon
+        sx={{ color: "#FFFFFF", width: "4vw", height: "4vh", pl: 3 }}
+      />
     </Box>
   );
 }

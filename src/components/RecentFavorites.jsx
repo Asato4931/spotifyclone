@@ -6,8 +6,9 @@ import thisisiri from "../img/thisisiri.jpg";
 import rollercoaster from "../img/rollercoaster.jpg";
 import gundamz from "../img/gundamz.jpg";
 import party from "../img/party.jpg";
+import ButtonBase from "@mui/material/ButtonBase";
 
-const madealbums = [
+const recentalbums = [
   {
     title: "ハッピーMix",
     desc: "JO1やiri、Official髭男ismほか多数",
@@ -40,66 +41,90 @@ const madealbums = [
 export default function RecentFavorites() {
   return (
     <Grid container spacing={7}>
-      {madealbums.map((madealbums, index) => (
+      {recentalbums.map((recentalbums, index) => (
         <Grid item xs={2.4} key={index}>
-          <Box
+          <ButtonBase
+            onClick={() => console.log(`${recentalbums.name} clicked!`)}
             sx={{
-              width: 350,
-              height: 500,
-              borderRadius: 5,
-              backgroundColor: "rgba(128, 128, 128,0.1)",
-              borderRadius: 8,
+              width: "100%",
+              height: "100%",
+              justifyContent: "left",
+              borderRadius: "10px",
+              transition: "background-color 0.3s",
+              "&:hover": {
+                backgroundColor: "#666666",
+              },
             }}
           >
-            <Card
+            <Box
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                height: "100%",
-                backgroundColor: "transparent",
+                width: 350,
+                height: 500,
+                borderRadius: 5,
+                backgroundColor: "rgba(128, 128, 128,0.1)",
+                borderRadius: 8,
               }}
             >
-              <Avatar
-                src={madealbums.image}
-                variant="square"
-                sx={{ width: 300, height: 300, borderRadius: 5, ml: 3, mt: 3 }}
-              />
-
-              <CardContent
+              <Card
                 sx={{
-                  flex: "1 0 auto",
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                  backgroundColor: "rgba(128, 128, 128,0)",
+                  flexDirection: "column",
+                  height: "100%",
+                  backgroundColor: "transparent",
                 }}
               >
-                <Stack direction="column">
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      color: "#FFFFFF",
-                      fontSize: "2.5em",
-                      fontFamily: "Avenir2, Arial, sans-serif",
-                    }}
-                  >
-                    {madealbums.title}
-                  </Typography>
+                <Avatar
+                  src={recentalbums.image}
+                  variant="square"
+                  sx={{
+                    width: 300,
+                    height: 300,
+                    borderRadius: 5,
+                    ml: 3,
+                    mt: 3,
+                  }}
+                />
 
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      color: "#808080",
-                      fontSize: "1.5em",
-                      fontFamily: "Avenir2, Arial, sans-serif",
-                    }}
-                  >
-                    {madealbums.desc}
-                  </Typography>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Box>
+                <CardContent
+                  sx={{
+                    flex: "1 0 auto",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    backgroundColor: "rgba(128, 128, 128,0)",
+                  }}
+                >
+                  <Stack direction="column">
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        color: "#FFFFFF",
+                        fontSize: "4.5vh",
+                        fontFamily: "Avenir2, Arial, sans-serif",
+                        textAlign: "left",
+                        pl: 1,
+                      }}
+                    >
+                      {recentalbums.title}
+                    </Typography>
+
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        color: "#808080",
+                        fontSize: "3.5vh",
+                        fontFamily: "Avenir2, Arial, sans-serif",
+                        textAlign: "left",
+                        pl: 1,
+                      }}
+                    >
+                      {recentalbums.desc}
+                    </Typography>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Box>
+          </ButtonBase>
         </Grid>
       ))}
     </Grid>

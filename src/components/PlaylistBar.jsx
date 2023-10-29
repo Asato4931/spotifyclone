@@ -19,6 +19,7 @@ export default function PlaylistBar() {
         width: "29vw",
         mt: 2,
         ml: -1,
+        overflowY: "auto",
       }}
     >
       <TopControls />
