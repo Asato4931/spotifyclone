@@ -1,91 +1,41 @@
-import { useState, Fragment, useRef } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Typography from "@mui/material/Typography";
-import Drawer from "@mui/material/Drawer";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import CssBaseline from "@mui/material/CssBaseline";
-import Grid from "@mui/material/Grid";
-
-import dog1 from "./img/dog1.jpg";
-import dog2 from "./img/dog2.jpg";
-
-import { PlayCircleOutline, Search, AddBox } from "@mui/icons-material";
+import FavoritesPlaylistPage from "./pages/playlistpages/FavoritesPlaylistPage";
+import HarenchiPlaylistPage from "./pages/playlistpages/HarenchiPlaylistPage";
+import NewPlaylistPage from "./pages/playlistpages/NewPlaylistPage";
+import Playlist2PlaylistPage from "./pages/playlistpages/Playlist2PlaylistPage";
+import RebornPlaylistPage from "./pages/playlistpages/RebornPlaylistPage";
+import VibrationsPlaylistPage from "./pages/playlistpages/VibrationsPlaylistPage";
+import WeeklyPlaylistPage from "./pages/playlistpages/WeeklyPlaylistPage";
+import XiPlaylistPage from "./pages/playlistpages/XiPlaylistPage";
+import HomePage from "./pages/HomePage";
 
 // Componentのimport
 
-import HomeSearch from "./components/HomeSearch";
-import PlaylistBar from "./components/PlaylistBar";
-
-import MainContent from "./components/MainContent";
-
 export default function App() {
-  const theme = createTheme({
-    palette: {
-      background: {
-        default: "#000000",
-      },
-    },
-  });
-
   return (
-    <ThemeProvider theme={theme}>
-      <Fragment>
-        <CssBaseline>
-          <Grid
-            container
-            spacing={0}
-            style={{
-              height: "200vh",
-              paddingTop: "20px",
-              color: "#000000",
-            }}
-          >
-            <Grid item xs={3}>
-              <Drawer
-                sx={{
-                  height: "200vh",
-                  width: "30vw",
-                  flexShrink: 0,
-                  "& .MuiDrawer-paper": {
-                    width: "30vw",
-                    boxSizing: "border-box",
-                    backgroundColor: "#000000",
-                  },
-                }}
-                variant="permanent"
-                anchor="left"
-              >
-                <Stack direction="column" spacing={3}>
-                  <Container maxWidth="sm">
-                    <HomeSearch />
-                    <PlaylistBar />
-                  </Container>
-                </Stack>
-              </Drawer>
-            </Grid>
-            <Grid item xs={9}>
-              <Box
-                sx={{
-                  height: "200vh",
-                  flexShrink: 0,
-                  background:
-                    "linear-gradient(to bottom, #28004d, #000000 20% )",
-                  borderRadius: "30px",
-                  marginLeft: "5vw",
-                  overflowY: "auto",
-                }}
-              >
-                <Stack direction="column" spacing={3}>
-                  <MainContent />
-                </Stack>
-              </Box>
-            </Grid>
-          </Grid>
-        </CssBaseline>
-      </Fragment>
-    </ThemeProvider>
+    <Router>
+      <Routes>
+        <Route
+          path="/playlists/favorites"
+          element={<FavoritesPlaylistPage />}
+        />
+        <Route path="/playlists/harenchi" element={<HarenchiPlaylistPage />} />
+        <Route path="/playlists/new" element={<NewPlaylistPage />} />
+        <Route
+          path="/playlists/playlist2"
+          element={<Playlist2PlaylistPage />}
+        />
+        <Route path="/playlists/reborn" element={<RebornPlaylistPage />} />
+        <Route
+          path="/playlists/vibrations"
+          element={<VibrationsPlaylistPage />}
+        />
+        <Route path="/playlists/weekly" element={<WeeklyPlaylistPage />} />
+        <Route path="/playlists/xi" element={<XiPlaylistPage />} />
+
+        <Route path="/" element={<HomePage />}></Route>
+      </Routes>
+    </Router>
   );
 }

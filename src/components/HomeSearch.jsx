@@ -8,6 +8,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 
 import ButtonBase from "@mui/material/ButtonBase";
+import { Link } from "react-router-dom";
 
 export default function HomeSearch() {
   return (
@@ -30,26 +31,31 @@ export default function HomeSearch() {
           }}
         >
           <ButtonBase onClick={() => console.log("Home clicked!")}>
-            <IconButton>
-              <HomeIcon
-                sx={{
-                  color: "#FFFFFF",
-                  width: "4vw",
-                  height: "4vh",
-                }}
-              />
-              <Typography
-                sx={{
-                  pl: 2,
-                  pt: 1,
-                  color: "#FFFFFF",
-                  fontSize: "4.5vh",
-                  fontFamily: "Avenir2, Arial, sans-serif",
-                }}
-              >
-                ホーム
-              </Typography>
-            </IconButton>
+            <Link
+              to={"/"}
+              style={{ textDecoration: "none", color: "inherit" }} // To keep the look consistent
+            >
+              <IconButton>
+                <HomeIcon
+                  sx={{
+                    color: "#FFFFFF",
+                    width: "4vw",
+                    height: "4vh",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    pl: 2,
+                    pt: 1,
+                    color: "#FFFFFF",
+                    fontSize: "4.5vh",
+                    fontFamily: "Avenir2, Arial, sans-serif",
+                  }}
+                >
+                  ホーム
+                </Typography>
+              </IconButton>
+            </Link>
           </ButtonBase>
         </Stack>
 
