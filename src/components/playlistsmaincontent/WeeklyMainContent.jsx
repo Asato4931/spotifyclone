@@ -1,12 +1,12 @@
-import AlbumGrid from "./AlbumGrid";
-import MainHeader from "./MainHeader";
-import MadeForYouBoxes from "./MadeForYouBoxes";
-import RecentFavorites from "./RecentFavorites";
+import AlbumGrid from "../AlbumGrid";
+import MainHeader from "../MainHeader";
+import MadeForYouBoxes from "../MadeForYouBoxes";
+import RecentFavorites from "../RecentFavorites";
 
 import Container from "@mui/material/Container";
 import { Typography } from "@mui/material";
 
-export default function MainContent() {
+export default function WeeklyMainContent() {
   return (
     <Container maxWidth="false">
       <MainHeader />
@@ -19,7 +19,7 @@ export default function MainContent() {
           fontFamily: "Avenir2, Arial, sans-serif",
         }}
       >
-        おはよう
+        Weekly Mix
       </Typography>
       <AlbumGrid />
       <Typography
@@ -32,7 +32,7 @@ export default function MainContent() {
           fontFamily: "Avenir2, Arial, sans-serif",
         }}
       >
-        メイド・フォー・ユー
+        Favorites
       </Typography>
 
       <MadeForYouBoxes />
@@ -47,7 +47,7 @@ export default function MainContent() {
           fontFamily: "Avenir2, Arial, sans-serif",
         }}
       >
-        ちょっと前のお気に入り
+        Favorites
       </Typography>
       <RecentFavorites />
     </Container>
