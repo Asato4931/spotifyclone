@@ -83,7 +83,7 @@ export default function Playlists() {
     <Box
       sx={{
         overflowY: "auto",
-        maxHeight: "70vh",
+        maxHeight: "62vh",
         width: "100%",
 
         "&::-webkit-scrollbar": {
