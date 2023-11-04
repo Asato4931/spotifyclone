@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import { Link } from "react-router-dom";
 
@@ -15,70 +16,21 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import heart from "../img/heart.jpg";
-
-import cherokee from "../img/cherokee.jpg";
-import xi from "../img/Xi.jpg";
-import vibrations from "../img/vibrations.jpg";
-import harenchi from "../img/harenchi.jpg";
-import senkou from "../img/senkou.jpg";
-import weekly from "../img/discover.jpg";
-import reborn from "../img/reborn.jpg";
-
-const playlists1 = [
-  {
-    name: "お気に入りの曲",
-    author: "プレイリスト",
-    image: heart,
-    playlistname: "favorites",
-  },
-  {
-    name: "New",
-    author: "プレイリスト・asato4931",
-    image: cherokee,
-    playlistname: "new",
-  },
-  {
-    name: "XI",
-    author: "プレイリスト・asato4931",
-    image: xi,
-    playlistname: "xi",
-  },
-  {
-    name: "Vibrations Radio",
-    author: "プレイリスト・Spotify",
-    image: vibrations,
-    playlistname: "vibrations",
-  },
-  {
-    name: "ハレンチ",
-    author: "アルバム・ちゃんみな",
-    image: harenchi,
-    playlistname: "harenchi",
-  },
-  {
-    name: "プレイリスト #2",
-    author: "プレイリスト・asato4931",
-    image: senkou,
-    playlistname: "playlist2",
-  },
-  {
-    name: "Discover Weekly",
-    author: "プレイリスト・Spotify",
-    image: weekly,
-    playlistname: "weekly",
-  },
-  {
-    name: "家庭教師ヒットマンREBORN!",
-    author: "アルバム・佐橋俊彦",
-    image: reborn,
-    playlistname: "reborn",
-  },
-
-  // ... add more playlists here
-];
-
 export default function Playlists() {
+  const [playlists, setPlaylists] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/playlists/")
+      .then((response) => {
+        console.log(response.data);
+        setPlaylists(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the playlists!", error);
+      });
+  }, []);
+
   return (
     <Box
       sx={{
@@ -110,9 +62,9 @@ export default function Playlists() {
       }}
     >
       <List>
-        {playlists1.map((playlists1, index) => (
+        {playlists.map((playlist, index) => (
           <Link
-            to={`/playlists/${playlists1.playlistname
+            to={`/playlists/${playlist.playlist_title
               .replace(/ /g, "-")
               .toLowerCase()}`} // Convert playlist names to lowercase hyphenated strings for URL paths
             key={index}
@@ -120,7 +72,7 @@ export default function Playlists() {
           >
             <ButtonBase
               key={index}
-              onClick={() => console.log(`${playlists1.name} clicked!`)}
+              onClick={() => console.log(`${playlist.playlist_title} clicked!`)}
               sx={{
                 width: "100%",
                 height: "100%",
@@ -140,7 +92,7 @@ export default function Playlists() {
               >
                 <ListItemAvatar>
                   <Avatar
-                    src={playlists1.image}
+                    src={`http://127.0.0.1:8000${playlist.playlist_logo}`}
                     variant="square"
                     sx={{ width: 100, height: 100, borderRadius: 1 }}
                   />
@@ -155,7 +107,7 @@ export default function Playlists() {
                         fontFamily: "Avenir, Arial, sans-serif",
                       }}
                     >
-                      {playlists1.name}
+                      {playlist.playlist_title}
                     </Typography>
                   }
                   secondary={
@@ -167,7 +119,7 @@ export default function Playlists() {
                         fontFamily: "Avenir, Arial, sans-serif",
                       }}
                     >
-                      {playlists1.author}
+                      {playlist.playlist_subtitle}
                     </Typography>
                   }
                   sx={{ paddingLeft: "1em" }}
