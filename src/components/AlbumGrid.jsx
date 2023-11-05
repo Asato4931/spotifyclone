@@ -1,92 +1,92 @@
-import {
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  Avatar,
-  Button,
-} from "@mui/material";
+import { Grid, Card, CardContent, Typography, Avatar } from "@mui/material";
 import ButtonBase from "@mui/material/ButtonBase";
 
-import dog2 from "../img/dog2.jpg";
-
-import heart from "../img/heart.jpg";
-import cherokee from "../img/cherokee.jpg";
-import xi from "../img/Xi.jpg";
-
-import rollercoaster from "../img/rollercoaster.jpg";
-
-import bf1 from "../img/bf1.jpg";
-
-const albums = [
-  { name: "お気に入りの曲", image: heart },
-  { name: "XI", image: xi },
-  { name: "Battlefield 1 (Original Soundtrack)", image: bf1 },
-  { name: "New", image: cherokee },
-  { name: "NMIXX", image: rollercoaster },
-  { name: "水星の魔女 OP ED", image: dog2 },
-
-  // ... rest of your albums here
-];
+import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 export default function AlbumGrid() {
+  const [welcomeplaylists, setwelcomePlaylists] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/welcomeplaylists/")
+      .then((response) => {
+        console.log(response.data);
+        setwelcomePlaylists(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the playlists!", error);
+      });
+  }, []);
+
   return (
     <Grid container spacing={2}>
-      {albums.map((albums, index) => (
+      {welcomeplaylists.map((welcomeplaylist, index) => (
         <Grid item xs={4} key={index}>
-          <ButtonBase
-            onClick={() => console.log(`${albums.name} clicked!`)}
-            sx={{
-              width: "100%",
-              height: "100%",
-              justifyContent: "left",
-              borderRadius: "10px",
-              transition: "background-color 0.3s",
-              "&:hover": {
-                backgroundColor: "#666666",
-              },
-            }}
+          <Link
+            to={`/playlists/${welcomeplaylist.playlist_title
+              .replace(/ /g, "-")
+              .toLowerCase()}`} // Convert playlist names to lowercase hyphenated strings for URL paths
+            key={index}
+            style={{ textDecoration: "none", color: "inherit" }} // To keep the look consistent
           >
-            <Card
+            <ButtonBase
+              onClick={() =>
+                console.log(`${welcomeplaylist.playlist_title} clicked!`)
+              }
               sx={{
-                display: "flex",
-                flexDirection: "row",
-                height: "100%",
                 width: "100%",
-                flexGrow: 1,
-                backgroundColor: "transparent",
+                height: "100%",
+                justifyContent: "left",
                 borderRadius: "10px",
+                transition: "background-color 0.3s",
+                "&:hover": {
+                  backgroundColor: "#666666",
+                },
               }}
             >
-              <Avatar
-                src={albums.image}
-                variant="square"
-                sx={{ width: 150, height: 150, borderRadius: 0 }}
-              />
-
-              <CardContent
+              <Card
                 sx={{
-                  flex: "1 0 auto",
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                  backgroundColor: "rgba(128, 128, 128,0.2)",
+                  flexDirection: "row",
+                  height: "100%",
+                  width: "100%",
+                  flexGrow: 1,
+                  backgroundColor: "transparent",
+                  borderRadius: "10px",
                 }}
               >
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    color: "#FFFFFF",
+                <Avatar
+                  src={`http://127.0.0.1:8000${welcomeplaylist.playlist_logo}`}
+                  variant="square"
+                  sx={{ width: 150, height: 150, borderRadius: 0 }}
+                />
 
-                    fontSize: "4.5vh",
-                    fontFamily: "Avenir2, Arial, sans-serif",
+                <CardContent
+                  sx={{
+                    flex: "1 0 auto",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    backgroundColor: "rgba(128, 128, 128,0.2)",
                   }}
                 >
-                  {albums.name}
-                </Typography>
-              </CardContent>
-            </Card>
-          </ButtonBase>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      color: "#FFFFFF",
+
+                      fontSize: "4.5vh",
+                      fontFamily: "Avenir2, Arial, sans-serif",
+                    }}
+                  >
+                    {welcomeplaylist.playlist_title}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </ButtonBase>
+          </Link>
         </Grid>
       ))}
     </Grid>

@@ -1,46 +1,34 @@
 import { Grid, Card, CardContent, Typography, Avatar } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import daily1 from "../img/dailymix1.jpg";
-import daily2 from "../img/dailymix2.jpg";
-import daily3 from "../img/dailymix3.jpg";
-import daily4 from "../img/dailymix4.jpg";
-import discover from "../img/discover.jpg";
+
 import ButtonBase from "@mui/material/ButtonBase";
 
-const madealbums = [
-  {
-    title: "Daily Mix 1",
-    desc: "JO1やiri、Official髭男ismほか多数",
-    image: daily1,
-  },
-  { title: "Daily Mix 2", desc: "tripleSやITZY、twiceほか多数", image: daily2 },
-  {
-    title: "Daily Mix 3",
-    desc: "インシンクやGorgon City、ほか多数",
-    image: daily3,
-  },
-  {
-    title: "Daily Mix 4",
-    desc: "JO1やiri、Official髭男ismほか多数",
-    image: daily4,
-  },
-  {
-    title: "Discover Weekly",
-    desc: "今週のミックステープ。あなたのために選んだ新曲",
-    image: discover,
-  },
-
-  // ... rest of your albums here
-];
-
 export default function MadeForYouBoxes() {
+  const [madeforyouplaylists, setmadeforyouPlaylists] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/madeforyouplaylists/")
+      .then((response) => {
+        console.log(response.data);
+        setmadeforyouPlaylists(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the playlists!", error);
+      });
+  }, []);
+
   return (
     <Grid container spacing={7}>
-      {madealbums.map((madealbums, index) => (
+      {madeforyouplaylists.map((madeforyouplaylist, index) => (
         <Grid item xs={2.4} key={index}>
           <ButtonBase
-            onClick={() => console.log(`${madealbums.name} clicked!`)}
+            onClick={() =>
+              console.log(`${madeforyouplaylist.playlist_title} clicked!`)
+            }
             sx={{
               width: "100%",
               height: "100%",
@@ -70,7 +58,7 @@ export default function MadeForYouBoxes() {
                 }}
               >
                 <Avatar
-                  src={madealbums.image}
+                  src={`http://127.0.0.1:8000${madeforyouplaylist.playlist_logo}`}
                   variant="square"
                   sx={{
                     width: 300,
@@ -101,7 +89,7 @@ export default function MadeForYouBoxes() {
                         pl: 1,
                       }}
                     >
-                      {madealbums.title}
+                      {madeforyouplaylist.playlist_title}
                     </Typography>
 
                     <Typography
@@ -114,7 +102,7 @@ export default function MadeForYouBoxes() {
                         pl: 1,
                       }}
                     >
-                      {madealbums.desc}
+                      {madeforyouplaylist.playlist_subtitle}
                     </Typography>
                   </Stack>
                 </CardContent>

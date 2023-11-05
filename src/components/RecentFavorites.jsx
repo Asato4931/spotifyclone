@@ -1,50 +1,35 @@
 import { Grid, Card, CardContent, Typography, Avatar } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import happymix from "../img/happymix.jpg";
-import thisisiri from "../img/thisisiri.jpg";
-import rollercoaster from "../img/rollercoaster.jpg";
-import gundamz from "../img/gundamz.jpg";
-import party from "../img/party.jpg";
+
 import ButtonBase from "@mui/material/ButtonBase";
 
-const recentalbums = [
-  {
-    title: "ハッピーMix",
-    desc: "JO1やiri、Official髭男ismほか多数",
-    image: happymix,
-  },
-  {
-    title: "This Is Iri",
-    desc: "Hip Hop的なリリックとソウルフルな歌声",
-    image: thisisiri,
-  },
-  {
-    title: "摩天楼",
-    desc: "iri",
-    image: rollercoaster,
-  },
-  {
-    title: "機動戦士Zガンダム",
-    desc: "三枝成影",
-    image: gundamz,
-  },
-  {
-    title: "A Midsummer NMIXX",
-    desc: "NMIXX",
-    image: party,
-  },
-
-  // ... rest of your albums here
-];
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 export default function RecentFavorites() {
+  const [recentplaylists, setrecentPlaylists] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/recentplaylists/")
+      .then((response) => {
+        console.log(response.data);
+        setrecentPlaylists(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the playlists!", error);
+      });
+  }, []);
+
   return (
     <Grid container spacing={7}>
-      {recentalbums.map((recentalbums, index) => (
+      {recentplaylists.map((recentplaylist, index) => (
         <Grid item xs={2.4} key={index}>
           <ButtonBase
-            onClick={() => console.log(`${recentalbums.name} clicked!`)}
+            onClick={() =>
+              console.log(`${recentplaylist.playlist_title} clicked!`)
+            }
             sx={{
               width: "100%",
               height: "100%",
@@ -74,7 +59,7 @@ export default function RecentFavorites() {
                 }}
               >
                 <Avatar
-                  src={recentalbums.image}
+                  src={`http://127.0.0.1:8000${recentplaylist.playlist_logo}`}
                   variant="square"
                   sx={{
                     width: 300,
@@ -105,7 +90,7 @@ export default function RecentFavorites() {
                         pl: 1,
                       }}
                     >
-                      {recentalbums.title}
+                      {recentplaylist.playlist_title}
                     </Typography>
 
                     <Typography
@@ -118,7 +103,7 @@ export default function RecentFavorites() {
                         pl: 1,
                       }}
                     >
-                      {recentalbums.desc}
+                      {recentplaylist.playlist_subtitle}
                     </Typography>
                   </Stack>
                 </CardContent>
