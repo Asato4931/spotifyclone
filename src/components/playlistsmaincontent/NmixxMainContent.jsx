@@ -1,16 +1,12 @@
-import MainHeader from "../MainHeader";
-
 import SongList from "../SongList";
-
+import MainHeader from "../MainHeader";
 import PlaylistPageBar from "../PlaylistPageBar";
 
 import Container from "@mui/material/Container";
-import { Divider, Grid } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import DividerHeader from "../../components/DividerHeader";
 
-import { Typography } from "@mui/material";
-
-export default function HarenchiMainContent() {
+export default function NmixxMainContent() {
   return (
     <Container maxWidth="false">
       <MainHeader />
@@ -24,7 +20,7 @@ export default function HarenchiMainContent() {
           fontFamily: "Avenir2, Arial, sans-serif",
         }}
       >
-        ハレンチ
+        Nmixx
       </Typography>
       <PlaylistPageBar />
 
