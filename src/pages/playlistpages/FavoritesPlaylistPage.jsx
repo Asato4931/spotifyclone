@@ -31,8 +31,8 @@ export default function FavoritesPlaylistPage() {
           <Grid
             container
             spacing={0}
-            style={{
-              height: "200vh",
+            sx={{
+              height: "80vh",
               paddingTop: "20px",
               color: "#000000",
             }}
@@ -40,10 +40,8 @@ export default function FavoritesPlaylistPage() {
             <Grid item xs={3}>
               <Drawer
                 sx={{
-                  height: "200vh",
-                  width: "30vw",
-                  flexShrink: 0,
                   "& .MuiDrawer-paper": {
+                    height: "auto",
                     width: "30vw",
                     boxSizing: "border-box",
                     backgroundColor: "#000000",
@@ -67,7 +65,7 @@ export default function FavoritesPlaylistPage() {
                   height: "200vh",
                   flexShrink: 0,
                   background:
-                    "linear-gradient(to bottom, #28004d, #000000 20% )",
+                    "linear-gradient(to bottom, #28004d, #121212 20% )",
                   borderRadius: "30px",
                   marginLeft: "5vw",
                   overflowY: "auto",

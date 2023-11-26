@@ -15,8 +15,6 @@ import PlaylistBar from "../components/PlaylistBar";
 
 import MainContent from "../components/homepagemaincontent/MainContent";
 
-import PlayerBar from "../components/PlayerBar";
-
 export default function HomePage() {
   const theme = createTheme({
     palette: {
@@ -76,7 +74,6 @@ export default function HomePage() {
             </Grid>
           </Grid>
         </CssBaseline>
-        <PlayerBar />
       </Fragment>
     </ThemeProvider>
   );

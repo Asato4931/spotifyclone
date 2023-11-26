@@ -31,8 +31,8 @@ export default function NewPlaylistPage() {
           <Grid
             container
             spacing={0}
-            style={{
-              height: "200vh",
+            sx={{
+              height: "80vh",
               paddingTop: "20px",
               color: "#000000",
             }}
@@ -40,10 +40,8 @@ export default function NewPlaylistPage() {
             <Grid item xs={3}>
               <Drawer
                 sx={{
-                  height: "200vh",
-                  width: "30vw",
-                  flexShrink: 0,
                   "& .MuiDrawer-paper": {
+                    height: "auto",
                     width: "30vw",
                     boxSizing: "border-box",
                     backgroundColor: "#000000",
