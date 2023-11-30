@@ -1,4 +1,5 @@
 import React from "react";
+import { usePlayer } from "./PlayerContext";
 
 import Typography from "@mui/material/Typography";
 
@@ -13,40 +14,26 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import aonosumika from "../img/aonosumika.jpg";
-import specialz from "../img/specialz.jpg";
-import meinichi from "../img/meinichi.jpg";
-
-const songs = [
-  {
-    name: "青のすみか",
-    author: "キタニテツヤ",
-    added: "4週間前",
-    length: "3:16",
-    album: "青のすみか",
-    image: aonosumika,
-  },
-  {
-    name: "SPECIALZ",
-    author: "King Gnu",
-    added: "4週間前",
-    length: "3:59",
-    album: "SPECIALZ",
-    image: specialz,
-  },
-  {
-    name: "命日",
-    author: "ちゃんみな",
-    added: "2023年9月4日",
-    length: "3:22",
-    album: "ちゃんみな",
-    image: meinichi,
-  },
-
-  // ... add more playlists here
-];
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function SongList() {
+  const [Songs, setSongs] = useState([]);
+  const { playSong } = usePlayer();
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/お気に入りの曲/songs/")
+      .then((response) => {
+        console.log(response.data);
+        setSongs(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the Songs!", error);
+      });
+  }, []);
+
   return (
     <Box
       sx={{
@@ -78,10 +65,10 @@ export default function SongList() {
       }}
     >
       <List>
-        {songs.map((songs, index) => (
+        {Songs.map((songs, index) => (
           <ButtonBase
             key={index}
-            onClick={() => console.log(`${songs.name} clicked!`)}
+            onClick={() => playSong(songs)}
             sx={{
               width: "100%",
               height: "100%",
@@ -115,7 +102,7 @@ export default function SongList() {
               </Typography>
               <ListItemAvatar>
                 <Avatar
-                  src={songs.image}
+                  src={`http://127.0.0.1:8000${songs.song_logo}`}
                   variant="square"
                   sx={{ width: 100, height: 100, borderRadius: 1, ml: "5vh" }}
                 />
@@ -130,7 +117,7 @@ export default function SongList() {
                       fontFamily: "Avenir, Arial, sans-serif",
                     }}
                   >
-                    {songs.name}
+                    {songs.song_title}
                   </Typography>
                 }
                 secondary={
@@ -142,7 +129,7 @@ export default function SongList() {
                       fontFamily: "Avenir, Arial, sans-serif",
                     }}
                   >
-                    {songs.author}
+                    {songs.artist}
                   </Typography>
                 }
                 sx={{ paddingLeft: "1vh" }}
@@ -156,7 +143,7 @@ export default function SongList() {
                   fontFamily: "Avenir, Arial, sans-serif",
                 }}
               >
-                {songs.album}
+                {songs.album_title}
               </Typography>
               <Typography
                 variant="body2"
@@ -166,7 +153,7 @@ export default function SongList() {
                   fontFamily: "Avenir, Arial, sans-serif",
                 }}
               >
-                {songs.added}
+                {songs.added_data}
               </Typography>
               <Typography
                 variant="body2"
@@ -176,7 +163,7 @@ export default function SongList() {
                   fontFamily: "Avenir, Arial, sans-serif",
                 }}
               >
-                {songs.length}
+                {songs.duration}
               </Typography>
             </ListItem>
           </ButtonBase>
