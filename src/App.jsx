@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { PlayerProvider } from "./components/PlayerContext";
+import PlayerProvider from "./components/PlayerContext";
 
 import FavoritesPlaylistPage from "./pages/playlistpages/FavoritesPlaylistPage";
 import HarenchiPlaylistPage from "./pages/playlistpages/HarenchiPlaylistPage";
